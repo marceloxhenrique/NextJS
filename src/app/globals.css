@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .input {
+    @apply text-black px-2 py-1 rounded-sm mb-6 outline-blue-800 w-[32rem] h-10
+  }
+
+  .button {
+    @apply bg-blue-800 p-2 my-4 rounded-sm text-2xl
+  }
+
+  .label {
+    @apply text-xl py-1
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -18,10 +32,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
