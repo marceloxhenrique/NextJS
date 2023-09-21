@@ -1,18 +1,51 @@
 "use client";
-
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Axios } from "axios";
+import axios from "axios";
+import toast from "react-hot-toast";
 
+// const notify = () => toast("Here is your toast");
 export default function SignupPage() {
+  const router = useRouter();
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
   });
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const onSignup = async () => {
+    if (
+      user.email.length > 0 &&
+      user.password.length > 0 &&
+      user.password.length > 0
+    ) {
+      try {
+        const res = await axios.post("/api/users/signup", user);
+        console.log("Signup success", res.data);
+        router.push("/login");
+        toast.success("Sugnup succesfully");
+        // notify;
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    } else {
+      toast.error("Fill up the form");
+    }
+  };
 
-  const onSignup = async () => {};
+  useEffect(() => {
+    if (
+      user.email.length > 0 &&
+      user.password.length > 0 &&
+      user.password.length > 0
+    ) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user]);
+
   console.log(user);
   return (
     <main className="flex  flex-col items-center justify-center min-h-screen py-2 bg-gray-800">
@@ -33,6 +66,7 @@ export default function SignupPage() {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        {user.username.length < 0 && <p>Enter a valid Usernames</p>}
         <label className="label" htmlFor="email">
           Email
         </label>

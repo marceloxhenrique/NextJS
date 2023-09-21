@@ -4,11 +4,11 @@
 
 @layer components {
   .input {
-    @apply text-black px-2 py-1 rounded-sm mb-6 outline-blue-800 w-[32rem] h-10
+    @apply text-black px-2 py-1 rounded-sm mb-6 outline-blue-800 h-10 md:w-[32rem]
   }
 
   .button {
-    @apply bg-blue-800 p-2 my-4 rounded-sm text-2xl
+    @apply bg-blue-800 p-2 my-4 rounded-sm text-2xl hover:bg-blue-600
   }
 
   .label {
