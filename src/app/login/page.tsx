@@ -2,15 +2,30 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Axios } from "axios";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
-  const onLogin = async () => {};
+  const onLogin = async () => {
+    if (user.email.length > 0 && user.password.length > 0) {
+      try {
+        // console.log(user);
+        const res = await axios.post("/api/users/login", user);
+        console.log(res.data);
+        toast.success("Login success");
+        router.push("/profile");
+      } catch (error: any) {
+        toast.error(error.message);
+        console.error("Log in failed", error.message);
+      }
+    }
+  };
 
   return (
     <main className="flex  flex-col items-center justify-center min-h-screen py-2 bg-gray-800">

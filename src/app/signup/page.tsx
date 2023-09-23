@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-// const notify = () => toast("Here is your toast");
 export default function SignupPage() {
   const router = useRouter();
   const [user, setUser] = useState({
@@ -16,8 +15,8 @@ export default function SignupPage() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const onSignup = async () => {
     if (
+      user.username.length > 0 &&
       user.email.length > 0 &&
-      user.password.length > 0 &&
       user.password.length > 0
     ) {
       try {
@@ -27,6 +26,7 @@ export default function SignupPage() {
         toast.success("Sugnup succesfully");
         // notify;
       } catch (error: any) {
+        console.error("Sign up failed", error.message);
         toast.error(error.message);
       }
     } else {
