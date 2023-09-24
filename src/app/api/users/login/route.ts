@@ -44,7 +44,6 @@ export async function POST(request: NextRequest) {
 
     response.cookies.set("token", token, { httpOnly: true });
     return response;
-    // console.log("And this is my body", reqBody);
   } catch (error: any) {
     return NextResponse.json({ error: "personalized" }, { status: 500 });
   }
