@@ -1,12 +1,14 @@
 "use client";
 import React from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
+  const router = useRouter();
   const handleLogout = async () => {
     try {
-      const res = await axios.post("/api/users/logout");
-      console.log(res);
+      await axios.post("/api/users/logout");
+      router.push("/login");
     } catch (error) {
       console.error("here", error);
     }
